@@ -1,24 +1,28 @@
 import pandas as pd
 
-# Load all 3 CSV files
-df1 = pd.read_csv('daily_sales_data_0.csv')
-df2 = pd.read_csv('daily_sales_data_1.csv')
-df3 = pd.read_csv('daily_sales_data_2.csv')
+df1 = pd.read_csv("data/daily_sales_data_0.csv")
+df2 = pd.read_csv("data/daily_sales_data_1.csv")
+df3 = pd.read_csv("data/daily_sales_data_2.csv")
 
-# Combine them into one DataFrame
 df = pd.concat([df1, df2, df3], ignore_index=True)
 
-# Filter only Pink Morsels (handle case + extra spaces safely)
-df['product'] = df['product'].str.strip().str.lower()
-df = df[df['product'] == 'pink morsel']
+df["product"] = df["product"].astype(str).str.strip().str.lower()
+df = df[df["product"] == "pink morsel"].copy()
 
-# Create sales column
-df['sales'] = df['quantity'] * df['price']
+df["price"] = (
+    df["price"]
+    .astype(str)
+    .str.replace("$", "", regex=False)
+    .astype(float)
+)
 
-# Keep only required columns
-df = df[['sales', 'date', 'region']]
+df["quantity"] = pd.to_numeric(df["quantity"], errors="coerce")
+df["date"] = pd.to_datetime(df["date"], errors="coerce")
 
-# Save output file (inside data folder)
-df.to_csv('formatted_output.csv', index=False)
+df["sales"] = df["quantity"] * df["price"]
 
-print("✅ formatted_output.csv created successfully!")
+df = df[["sales", "date", "region"]].dropna().sort_values("date")
+
+df.to_csv("formatted_output.csv", index=False, date_format="%Y-%m-%d")
+
+print("formatted_output.csv created successfully!")
