@@ -1,0 +1,219 @@
+/* Art direction: Soul Foods sales dashboard → warm analytical interface
+   Palette: neutral beige surfaces with teal accent and restrained coral highlights
+   Typography: clean sans-serif stack for readable dashboard UI
+   Density: balanced */
+
+:root {
+  --bg: #f7f6f2;
+  --surface: rgba(249, 248, 245, 0.88);
+  --surface-strong: #fbfbf9;
+  --border: rgba(40, 37, 29, 0.12);
+  --text: #28251d;
+  --muted: #6f6c66;
+  --primary: #01696f;
+  --primary-soft: rgba(1, 105, 111, 0.10);
+  --accent: #da7101;
+  --danger: #a13544;
+  --shadow: 0 20px 60px rgba(40, 37, 29, 0.10);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(218, 113, 1, 0.10), transparent 30%),
+    radial-gradient(circle at top right, rgba(1, 105, 111, 0.12), transparent 28%),
+    linear-gradient(180deg, #fcfbf8 0%, #f3f0ea 100%);
+}
+
+.app-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-orb {
+  position: fixed;
+  width: 280px;
+  height: 280px;
+  border-radius: 999px;
+  filter: blur(18px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.bg-orb-one {
+  top: -60px;
+  left: -60px;
+  background: #da7101;
+}
+
+.bg-orb-two {
+  right: -70px;
+  bottom: 30px;
+  background: #01696f;
+}
+
+.page {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 20px 56px;
+}
+
+.hero-card,
+.controls-card,
+.chart-card {
+  background: var(--surface);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+
+.hero-card {
+  padding: 32px;
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-card h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.hero-card p {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.controls-card {
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+.controls-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.controls-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(218, 113, 1, 0.10);
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.region-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.region-radio-group label {
+  margin: 0;
+}
+
+.region-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.region-radio-label:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(40, 37, 29, 0.10);
+  border-color: rgba(1, 105, 111, 0.24);
+}
+
+.region-radio-input {
+  accent-color: var(--primary);
+  margin: 0;
+}
+
+.chart-card {
+  padding: 14px;
+}
+
+#sales-line-chart {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 20px 14px 32px;
+  }
+
+  .hero-card,
+  .controls-card,
+  .chart-card {
+    border-radius: 20px;
+  }
+
+  .hero-card {
+    padding: 24px;
+  }
+
+  .controls-card {
+    padding: 18px;
+  }
+
+  .controls-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .region-radio-group {
+    flex-direction: column;
+  }
+
+  .region-radio-label {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
